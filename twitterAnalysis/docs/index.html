@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>CS5395 - Twitter EDA pipeline by l-n63</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>CS5395 - Twitter EDA pipeline</h1>
+        <p>CS Independent Study Project - Texas State University</p>
+
+        <p class="view"><a href="https://git.txstate.edu/l-n63/CS5395">View the Project on GitHub <small>l-n63/CS5395</small></a></p>
+
+
+      </header>
+      <section>
+        <h3>
+<a id="tweet-analysis-db" class="anchor" href="#tweet-analysis-db" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tweet Analysis DB</h3>
+<p>This repository was created as part of CS5395 IND STUDY Project at Texas State University, Computer Science Department.</p>
+<p>Student: Lia Nogueira de Moura /  Advisor: Dr. Jelena Tesic</p>
+<h3>
+<a id="abstract" class="anchor" href="#abstract" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Abstract</h3>
+<p>Twitter data has been used extensively for research in the past years. The large number of users and messages shared every day creates interesting data for many different areas of research. The process to analyze Twitter data requires a series of initial steps independent of the research subject. This study proposes a subject agnostic pipeline to analyze Twitter data. It also includes an exploratory topic analysis using three known unsupervised machine learning models (LDA, LSI and NFM).  A database of over 3 million tweets related to the #MeToo movement was used as case study. Analytics extracted from this dataset illustrate common findings and challenges.</p>
+<h4>
+<a id="database-design" class="anchor" href="#database-design" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Database Design</h4>
+<p>Document driven NoSql databases such as MongoDB use the concept of collections. Collections are structures that hold all documents. Collections are similar to tables in relational databases.
+The following are the collections created for this pipeline:</p>
+<p>-dbSettings: This collection will contain the basic configuration to run the program. This is to make sure each person only uses what it is important to their project. (e.g. no reason to save certain fields like geocode if they are not important for the analysis.) This table will be used as a driver to decide what to save on the database.</p>
+<p>-loadedFiles: This collection will save the directory and file names that have been loaded already. LoadTime and path will be columns. This is to make sure we don't load the same files multiple times.
+twitterSearches. This collection will save the searches requested to Twitter API. This will only be used when the tweets are being saved straight from Twitter API.
+This is to keep track of what search requests have been done already. It will help to determine the number of results returned for a search and will also help us to make sure we don’t waste requests doing the same searches.</p>
+<p>-tweet: This collection will be used to save the complete tweet document. It will also contain a sequence number that will be used in the recovery process.</p>
+<p>-focusedTweet: This collection will only contain the interesting information from the tweets. It will only contain the fields that were set on the settings.</p>
+<p>-tweetWords: This collection will save each word separately from every tweet plus some extra information about the tweet. It will also contain interesting tags about that word. (e.g English or not, verb or not, etc.)</p>
+<p>-tweetSentences: This collection will save each sentence separately from every tweet plus some extra information about the tweet. It will also contain interesting tags about that word.</p>
+<p>-topicsByHashTag: This collection will save topic information for each hashtag using the three different unsupervised ML models</p>
+<p>-loadStatus: This collection will controls have been loaded into DB already. This collection was created to manage the recovery logic.</p>
+<p>-tweetCountByFileAgg: This collection will contain the count of all tweets in the dataset by files loaded.</p>
+<p>-tweetCountByPeriodAgg: This collection will contain the count of all tweets in the dataset by period. The period will be specified in the settings collection.</p>
+<p>-tweetCountByLanguageAgg: This collection will contain the count of all tweets in the dataset by language.</p>
+<p>-tweetCountByUserAgg: This collection will contain the count of all tweets in the dataset by user id. It will also include details about the user itself. The extra information about the user loaded in this collection will be identified in the settings collection.</p>
+<p>-wordCountAgg: This collection will contain the frequency of all words in the dataset.</p>
+<p>-hashTagCountAgg: This collection will contain the frequency of all hashtags in the dataset.</p>
+<p>-userLocationCountAgg: This collection will contain the count of all users in the dataset by their location</p>
+<h4>
+<a id="python-library" class="anchor" href="#python-library" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Python Library</h4>
+<p>The library includes logic to extract data directly from Twitter’s API and to extract data from existent twitter .json files. The library also contains a process to select, clean and organize the data based on the given settings. Logic to export meaningful data to tab delimited .txt files is also included.</p>
+<p>The following are the main functions included in the library:</p>
+<p>-loadSettings: This method will load the settings saved in the DB into class variables</p>
+<p>-updateSettings: This method will update the setting into DB. It will also update the class variables</p>
+<p>-loadDocFromFile: This method will load tweet .json files into the DB (tweet collection). It goes through all .json files in the directory and load them one by one. It also saves the files already loaded into the 'loadedFiles' collection to make sure we don't load the same file twice.</p>
+<p>-extractDocFromAPI: This method will load tweets from Twitter API</p>
+<p>-loadFocusedData: This method will load the focusedTweet collection with the interesting information we want to study</p>
+<p>-breakTextIntoWords: This method will break text from tweets into words and tag them</p>
+<p>-breakTextIntoSentences: This method will break text from tweets into sentences</p>
+<p>-findTopicByHashtag: This method will find the topics for a hashtag using different models and tools</p>
+<p>-loadAggregations: This method will load the aggregation queries. One or many can be run. The parameters will help decide which ones to run.</p>
+<p>-exportData: This method will export the data into “|” delimited files</p>
+<h4>
+<a id="recovery-process" class="anchor" href="#recovery-process" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Recovery Process</h4>
+<p>The pipeline includes a recovery logic to make sure the processes don’t have to get run from the beginning in case of a failure. While inserting into the tweet collection, a sequence number gets attached to each tweet. Then every time any processes need to run, that sequence number is used to control what has already been processed or not. If something fails, the logic will be able to identify the last sequence number processed and continue from there.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://git.txstate.edu/l-n63">l-n63</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
