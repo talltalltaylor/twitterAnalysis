@@ -1,0 +1,75 @@
+ACRONYM,DESCRIPTION,TYPE
+FB,Facebook,Network-Specific
+G+,Google+,Network-Specific
+IG,Instagram,Network-Specific
+LI,Linkedin,Network-Specific
+YT,Youtube,Network-Specific
+DM,Direct Message,Network-Specific
+MT,Modified Tweet,Network-Specific
+PM,Private Message,Network-Specific
+RT,Retweet,Network-Specific
+B2B,Business To Business,Business
+B2C,Business To Consumer,Business
+CMGR,Community Manager,Business
+CMS,Content Management System,Business
+CPC,Cost Per Click,Business
+CPM,Cost Per Thousand,Business
+CR,Conversion Rate,Business
+CTA,Call To Action,Business
+CTR,Click-Through Rate,Business
+KPI,Key Performance Indicator,Business
+PPC,Pay Per Click,Business
+PV,Page Views,Business
+ROI,Return On Investiment,Business
+UGC,User Generated Content,Business
+API,Application Programming Interface,Technical
+ESP,Email Service Provider,Technical
+HTML,Hyper Text Markup,Technical
+ISP,Internet Service Provider,Technical
+RSS,Really Simple Syndication,Technical
+SaaS,Software as a Service,Technical
+SEM,Search Engine Marketing,Technical
+SEO,Search Engine Optimization,Technical
+TOS,Terms of Service,Technical
+UI,User Interface,Technical
+UX,User Experience,Technical
+AFAIK,As Far As I Know,Just For Fun
+AMA,Ask me Anything,Just For Fun
+BAE,Before Anyone Else,Just For Fun
+BFF,Best Friend Forever,Just For Fun
+BRB,Be Right Back,Just For Fun
+BTW,By The Way,Just For Fun
+FBO,Facebook Official,Just For Fun
+FF,Follow Friday,Just For Fun
+FOMO,Fear Of Missing Out,Just For Fun
+FTW,For The Win,Just For Fun
+FYI,For Your Information,Just For Fun
+GTG,Go To Go,Just For Fun
+ICYMI,In Case You Missed It,Just For Fun
+IDC,I Don't Care,Just For Fun
+IDK,I Don't Know,Just For Fun
+ILY,I Love You,Just For Fun
+IMHO,In My Humble Opinion,Just For Fun
+IMO,In My Opinion,Just For Fun
+IRL,In Real Life,Just For Fun
+JK,Just Kidding,Just For Fun
+LMAO,Laughing My Ass Off,Just For Fun
+LMK,Let Me Know,Just For Fun
+LOL,Laughing Out Loud,Just For Fun
+NBD,No Big Deal,Just For Fun
+NM,Not Much,Just For Fun
+NVM,Nevermind,Just For Fun
+NSFW,Not Safe For Work,Just For Fun
+OH,Overheard,Just For Fun
+OMG,Oh My Gosh,Just For Fun
+OMW,On My Way,Just For Fun
+PODT,Photo Of The Day,Just For Fun
+PPL,People,Just For Fun
+QOTD,Quote Of The Day,Just For Fun
+ROFL,Rolling On The Floor Laughing,Just For Fun
+SMH,Shaking My Head,Just For Fun
+YBH,To Be Honest,Just For Fun
+TBT,Throwback Thursday,Just For Fun
+TL;DR,Too Long;Dind't Read,Just For Fun
+WTF,What The F***,Just For Fun
+YOLO,You Only Live Once,Just For Fun
